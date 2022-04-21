@@ -150,6 +150,8 @@ impl<const S : u32> Input<S> {
     /// Create a new input pin.
     pub fn new() -> Self {
 
+        debug_assert!(S < 22);
+
         let pin = Pin{};
 
         unsafe {
@@ -167,6 +169,12 @@ impl<const S : u32> Input<S> {
     /// Set the pull direction of the pin.
     pub fn set_pull(&self, pull : Pull) {
         unsafe{self.pin.set_pull(pull)}
+    }
+}
+
+impl<const S : u32> Default for Input<S> {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -192,6 +200,8 @@ impl<const S : u32> Output<S> {
     /// Create a new input pin.
     pub fn new() -> Self {
 
+        debug_assert!(S < 22);
+
         let pin = Pin{};
 
         unsafe {
@@ -214,15 +224,24 @@ impl<const S : u32> Output<S> {
     }
 }
 
+impl<const S : u32> Default for Output<S> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+
 impl<const S : u32> OutputPin for Output<S> {
     type Error = ();
 
     fn set_low(&mut self) -> Result<(), Self::Error> {
-        Ok(unsafe {self.pin.set_output(false)})
+        unsafe {self.pin.set_output(false)};
+        Ok(())
     }
 
     fn set_high(&mut self) -> Result<(), Self::Error> {
-        Ok(unsafe {self.pin.set_output(true)})
+        unsafe {self.pin.set_output(true)};
+        Ok(())
     }
 }
 
@@ -235,4 +254,3 @@ impl<const S : u32> StatefulOutputPin for Output<S> {
         Ok(unsafe{!self.pin.get_output()})
     }
 }
-

@@ -7,8 +7,7 @@ edition = "2021"
 [dependencies]
 bare-metal = { version = "1" }
 embedded-hal = {version = "0.2", features = ["unproven"]}
-static_assertions = "1.1.0"
-riscv = "0.7"
+riscv = "0.8"
 esp32c3 = "0.3.0"
 esp32c-rt = {version = "0.1.1", optional = true, default-features = false, features = ["direct-boot", "esp32c3"]} 
 
