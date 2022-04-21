@@ -1,0 +1,15 @@
+[package]
+name = "esp32c3-hal"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+bare-metal = { version = "1" }
+embedded-hal = {version = "0.2", features = ["unproven"]}
+riscv = "0.8"
+esp32c3 = "0.3.0"
+esp32c-rt = {version = "0.1.1", optional = true, default-features = false, features = ["direct-boot", "esp32c3"]} 
+
+[features]
+rt = ["esp32c-rt"]
