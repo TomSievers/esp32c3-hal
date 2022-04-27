@@ -7,6 +7,7 @@ pub use esp32c3 as pac;
 pub use embedded_hal as hal;
 
 pub mod gpio;
+pub mod dma;
 
 #[cfg(feature = "rt")]
 pub use esp32c_rt;
